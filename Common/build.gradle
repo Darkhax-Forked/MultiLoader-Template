@@ -19,3 +19,7 @@ minecraft {
         }
     }
 }
+
+sourceSets {
+    bolb
+}

@@ -31,7 +31,10 @@ minecraft {
             mods {
                 modClientRun {
                     source sourceSets.main
-                    source project(":Common").sourceSets.main
+                }
+                
+                commonClientRun {
+                    source project(":Common").sourceSets.bolb
                 }
             }
         }
