@@ -1,6 +1,6 @@
 package net.darkhax.bookshelf.event;
 
-import net.darkhax.bookshelf.utils.ForgeHacks;
+import net.darkhax.bookshelf.util.ForgeHacks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
