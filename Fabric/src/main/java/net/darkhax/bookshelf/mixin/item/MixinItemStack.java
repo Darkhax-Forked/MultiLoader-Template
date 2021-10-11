@@ -1,7 +1,7 @@
 package net.darkhax.bookshelf.mixin.item;
 
 import com.google.common.collect.Multimap;
-import net.darkhax.bookshelf.collection.LazyMutable;
+import net.darkhax.bookshelf.function.LazyMutable;
 import net.darkhax.bookshelf.event.ItemEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.Attribute;
