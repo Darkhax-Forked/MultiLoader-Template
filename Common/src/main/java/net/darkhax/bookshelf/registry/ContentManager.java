@@ -10,16 +10,15 @@ import net.minecraft.world.level.block.Block;
  * appropriate.
  */
 public class ContentManager {
-    
+
     public final IContentHolder<Block> blocks;
     public final IContentHolder<Item> items;
     public final IContentHolder<Motive> paintings;
-    
+
     public ContentManager(String ownerId) {
-        
+
         this.blocks = new ContentHolder<>(ownerId);
         this.items = new ContentHolder<>(ownerId);
         this.paintings = new ContentHolder<>(ownerId);
     }
-    
 }

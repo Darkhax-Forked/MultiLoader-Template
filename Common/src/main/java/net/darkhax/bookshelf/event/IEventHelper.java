@@ -6,19 +6,18 @@ package net.darkhax.bookshelf.event;
  * handle things with different priority levels.
  */
 public interface IEventHelper {
-    
+
     /**
      * Notifies an event listener every time a tooltip is rendered for an ItemStack.
      *
      * @param event The event listener.
      */
     public void onItemTooltip(IItemTooltipEvent event);
-    
+
     /**
      * Notifies an event listener every time the attribute modifiers for an ItemStack are calculated.
      *
      * @param event The event listener.
      */
     public void onItemAttributeModifiers(IItemAttributeModifierEvent event);
-    
 }

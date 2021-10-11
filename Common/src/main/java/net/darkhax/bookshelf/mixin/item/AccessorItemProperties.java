@@ -9,29 +9,28 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Item.Properties.class)
 public interface AccessorItemProperties {
-    
+
     @Accessor("maxStackSize")
     int bookshelf$getMaxStackSize();
-    
+
     @Accessor("maxDamage")
     int bookshelf$getMaxDamage();
-    
+
     @Accessor("craftingRemainingItem")
     Item bookshelf$getCraftingRemainingItem();
-    
+
     @Accessor("category")
     CreativeModeTab bookshelf$getCategory();
-    
+
     @Accessor("rarity")
     Rarity bookshelf$getRarity();
-    
+
     @Accessor("foodProperties")
     FoodProperties bookshelf$getFoodProperties();
-    
+
     @Accessor("isFireResistant")
     boolean bookshelf$isFireResistant();
-    
+
     @Accessor("isFireResistant")
     void bookshelf$setFireResistant(boolean isFireResistant);
-    
 }

@@ -27,7 +27,7 @@ import net.minecraft.world.level.gameevent.GameEvent;
 import java.util.UUID;
 
 public class Serializers {
-    
+
     // JAVA TYPES
     public static final ISerializer<Boolean> BOOLEAN = SerializerBoolean.SERIALIZER;
     public static final ISerializer<Byte> BYTE = SerializerByte.SERIALIZER;
@@ -38,7 +38,7 @@ public class Serializers {
     public static final ISerializer<Double> DOUBLE = SerializerDouble.SERIALIZER;
     public static final ISerializer<String> STRING = SerializerString.SERIALIZER;
     public static final ISerializer<UUID> UUID = SerializerUUID.SERIALIZER;
-    
+
     // MINECRAFT TYPES
     public static final ISerializer<ResourceLocation> RESOURCE_LOCATION = SerializerResourceLocation.SERIALIZER;
     public static final ISerializer<ItemStack> ITEM_STACK = SerializerItemStack.SERIALIZER;
@@ -47,7 +47,7 @@ public class Serializers {
     public static final ISerializer<BlockPos> BLOCK_POS = SerializerBlockPos.SERIALIZER;
     public static final ISerializer<Ingredient> INGREDIENT = SerializerIngredient.SERIALIZER;
     public static final ISerializer<BlockState> BLOCK_STATE = SerializerBlockState.SERIALIZER;
-    
+
     // REGISTRY TYPES
     public static final ISerializer<Block> BLOCK = new SerializerRegistryEntry<>(Registry.BLOCK);
     public static final ISerializer<Item> ITEM = new SerializerRegistryEntry<>(Registry.ITEM);
@@ -64,5 +64,4 @@ public class Serializers {
     public static final ISerializer<EntityType<?>> ENTITY = new SerializerRegistryEntry<>(Registry.ENTITY_TYPE);
     public static final ISerializer<BlockEntityType<?>> BLOCK_ENTITY = new SerializerRegistryEntry<>(Registry.BLOCK_ENTITY_TYPE);
     public static final ISerializer<GameEvent> GAME_EVENT = new SerializerRegistryEntry<>(Registry.GAME_EVENT);
-    
 }

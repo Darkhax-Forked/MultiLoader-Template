@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  * listeners have the ability to modify the modifiers and can add or remove modifiers as needed.
  */
 public interface IItemAttributeModifierEvent {
-    
+
     /**
      * Notifies the event listener that the attribute modifiers for an ItemStack are being calculated. This will happen
      * after the vanilla game logic results have been calculated allowing the listener to modify the results as needed.
@@ -24,5 +24,4 @@ public interface IItemAttributeModifierEvent {
      *                  will only be unwrapped to a mutable state when requested via the supplier.
      */
     void calculateModifiers(ItemStack stack, EquipmentSlot slot, Supplier<Multimap<Attribute, AttributeModifier>> modifiers);
-    
 }

@@ -11,7 +11,7 @@ import java.util.List;
  * have the ability to modify the tooltip as needed.
  */
 public interface IItemTooltipEvent {
-    
+
     /**
      * Notifies the event listener that the tooltips for an ItemStack are being generated.
      *
@@ -20,5 +20,4 @@ public interface IItemTooltipEvent {
      * @param flag    User controlled options for what types of information tooltips should display.
      */
     void onNotify(ItemStack stack, List<Component> tooltip, TooltipFlag flag);
-    
 }
