@@ -7,19 +7,14 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Supplier;
 
-import javax.annotation.Nullable;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 
+import com.google.gson.JsonParseException;
 import net.darkhax.bookshelf.util.JSONHelper;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
 
 /**
  * Provides a structure for serializing common data types into the various data exchange formats used in the game. These
@@ -369,7 +364,6 @@ public interface ISerializer<T> {
      *
      * @return The written JSON element. If the optional value was not present this will be null.
      */
-    @Nullable
     default JsonElement fromJSONOptional(Optional<T> value) {
         
         return value.map(this::toJSON).orElse(null);

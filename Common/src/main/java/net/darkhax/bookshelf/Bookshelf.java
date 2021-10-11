@@ -10,6 +10,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.text.DecimalFormat;
+import java.util.ServiceLoader;
 
 public class Bookshelf {
     
@@ -20,19 +21,17 @@ public class Bookshelf {
     
     public final Content content;
     
-    public Bookshelf(IEventHelper events) {
+    public Bookshelf() {
         
         this.content = new Content(MOD_ID);
         
-        events.onItemTooltip((stack, tooltip, flag) -> tooltip.add(new TextComponent("Test")));
-        events.onItemAttributeModifiers((stack, slot, modifiers) -> {
+        Services.EVENTS.onItemTooltip((stack, tooltip, flag) -> tooltip.add(new TextComponent("Test")));
+        Services.EVENTS.onItemAttributeModifiers((stack, slot, modifiers) -> {
             
             if(stack.getItem() == Items.STICK && slot == EquipmentSlot.HEAD) {
                 
-                modifiers.get()
-                        .put(Attributes.ARMOR, new AttributeModifier("test", 5f, AttributeModifier.Operation.ADDITION));
+                modifiers.get().put(Attributes.ARMOR, new AttributeModifier("test", 5f, AttributeModifier.Operation.ADDITION));
             }
         });
     }
-    
 }
