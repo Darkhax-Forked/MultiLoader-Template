@@ -1,13 +1,9 @@
 plugins {
     id 'fabric-loom' version '0.9-SNAPSHOT'
-    id 'maven-publish'
     id 'idea'
 }
 
 archivesBaseName = "${mod_name}-fabric-${minecraft_version}"
-
-repositories {
-}
 
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
@@ -56,21 +52,5 @@ tasks.withType(JavaCompile) {
 jar {
     from("LICENSE") {
         rename { "${it}_${mod_name}" }
-    }
-}
-
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact(remapJar) {
-                builtBy remapJar
-            }
-            artifact(sourcesJar) {
-                builtBy remapSourcesJar
-            }
-        }
-    }
-
-    repositories {
     }
 }
