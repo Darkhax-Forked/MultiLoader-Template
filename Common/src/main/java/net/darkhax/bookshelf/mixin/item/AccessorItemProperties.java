@@ -33,4 +33,5 @@ public interface AccessorItemProperties {
     
     @Accessor("isFireResistant")
     void bookshelf$setFireResistant(boolean isFireResistant);
+    
 }

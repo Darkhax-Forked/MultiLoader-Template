@@ -57,7 +57,7 @@ public final class SerializerUUID implements ISerializer<UUID> {
             return compound.getUUID("id");
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a compund tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a compund tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

@@ -53,7 +53,7 @@ public final class SerializerString implements ISerializer<String> {
             return stringTag.getAsString();
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a string tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a string tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

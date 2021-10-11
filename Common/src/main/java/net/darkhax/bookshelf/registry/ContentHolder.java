@@ -72,7 +72,8 @@ public class ContentHolder<T> implements IContentHolder<T> {
     
     @Override
     public void addInsertListener(BiConsumer<ResourceLocation, T> listener) {
-    
+        
         this.insertListeners.add(listener);
     }
+    
 }

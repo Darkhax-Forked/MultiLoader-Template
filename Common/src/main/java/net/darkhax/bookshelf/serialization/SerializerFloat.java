@@ -54,7 +54,7 @@ public final class SerializerFloat implements ISerializer<Float> {
             return floatTag.getAsFloat();
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a number tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a number tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

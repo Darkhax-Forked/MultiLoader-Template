@@ -53,7 +53,7 @@ public final class SerializerDouble implements ISerializer<Double> {
             return doubleTag.getAsDouble();
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a double tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a double tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

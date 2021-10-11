@@ -54,7 +54,7 @@ public final class SerializerByte implements ISerializer<Byte> {
             return byteTag.getAsByte();
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a number tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a number tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

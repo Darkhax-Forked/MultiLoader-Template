@@ -75,7 +75,7 @@ public class SerializerCompoundTag implements ISerializer<CompoundTag> {
             return compound;
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a compound tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a compound tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

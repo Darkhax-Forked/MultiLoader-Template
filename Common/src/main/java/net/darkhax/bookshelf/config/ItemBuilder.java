@@ -10,7 +10,7 @@ public class ItemBuilder<T extends Item> extends RegistryEntryConfig<T> {
     private final Item.Properties properties;
     
     public ItemBuilder(Item.Properties properties, String id) {
-    
+        
         super("items", id);
         this.properties = properties;
     }
@@ -25,12 +25,12 @@ public class ItemBuilder<T extends Item> extends RegistryEntryConfig<T> {
     
     @Override
     JsonObject write(JsonObject json) {
-    
+        
         final AccessorItemProperties propsAccess = (AccessorItemProperties) properties;
         final JsonObject props = new JsonObject();
         props.addProperty("stackSize", propsAccess.bookshelf$getMaxStackSize());
         props.addProperty("durability", propsAccess.bookshelf$getMaxDamage());
-    
+        
         json.add("properties", props);
         return json;
     }
@@ -40,4 +40,5 @@ public class ItemBuilder<T extends Item> extends RegistryEntryConfig<T> {
         
         return (T) new Item(this.properties);
     }
+    
 }

@@ -79,7 +79,7 @@ public class SerializerItemStack implements ISerializer<ItemStack> {
             return new ItemStack(Serializers.ITEM.fromNBT(string));
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a compound tag or string. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a compound tag or string. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

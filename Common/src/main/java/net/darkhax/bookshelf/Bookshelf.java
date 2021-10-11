@@ -30,8 +30,10 @@ public class Bookshelf {
             
             if(stack.getItem() == Items.STICK && slot == EquipmentSlot.HEAD) {
                 
-                modifiers.get().put(Attributes.ARMOR, new AttributeModifier("test", 5f, AttributeModifier.Operation.ADDITION));
+                modifiers.get()
+                        .put(Attributes.ARMOR, new AttributeModifier("test", 5f, AttributeModifier.Operation.ADDITION));
             }
         });
     }
+    
 }

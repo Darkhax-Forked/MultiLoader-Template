@@ -12,44 +12,38 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
 
-public abstract class ConfigBuilder <T> implements Supplier<T> {
+public abstract class ConfigBuilder<T> implements Supplier<T> {
     
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
     @Override
     public T get() {
-    
+        
         Path fullPath = Services.PLATFORM.getConfigPath().resolve(this.getPath());
         File file = fullPath.toFile();
         
-        if (file.exists()) {
+        if(file.exists()) {
             
-            try (FileReader reader = new FileReader(file)) {
-            
+            try(FileReader reader = new FileReader(file)) {
+                
                 this.read(GSON.fromJson(reader, JsonObject.class));
+            } catch(IOException e) {
+                
+                throw new RuntimeException(e);
             }
+        } else {
             
-            catch(IOException e) {
+            file.getParentFile().mkdirs();
+            
+            try(FileWriter writer = new FileWriter(file)) {
+                
+                GSON.toJson(write(new JsonObject()), writer);
+            } catch(IOException e) {
                 
                 throw new RuntimeException(e);
             }
         }
         
-        else {
-        
-            file.getParentFile().mkdirs();
-            
-            try (FileWriter writer = new FileWriter(file)) {
-            
-                GSON.toJson(write(new JsonObject()), writer);
-            }
-            
-            catch(IOException e) {
-
-                throw new RuntimeException(e);
-            }
-        }
-    
         return this.create();
     }
     
@@ -60,4 +54,5 @@ public abstract class ConfigBuilder <T> implements Supplier<T> {
     abstract T create();
     
     abstract Path getPath();
+    
 }

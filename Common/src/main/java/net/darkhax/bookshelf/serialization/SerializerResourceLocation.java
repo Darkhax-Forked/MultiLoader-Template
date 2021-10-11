@@ -67,13 +67,7 @@ public final class SerializerResourceLocation implements ISerializer<ResourceLoc
     @Override
     public ResourceLocation fromNBT(Tag nbt) {
         
-        if(nbt instanceof StringTag stringTag) {
-            
-            return new ResourceLocation(stringTag.getAsString());
-        }
-        
-        throw new IllegalArgumentException("Expected NBT to be a double tag. Class was " + nbt.getClass() + " with ID " + nbt
-                .getId() + " instead.");
+        return new ResourceLocation(Serializers.STRING.fromNBT(nbt));
     }
     
 }

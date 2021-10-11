@@ -22,4 +22,5 @@ public class Content extends ContentManager {
         this.testItem = this.items.add(new ItemBuilder<>(new Item.Properties(), "test_item"));
         this.testPainting = this.paintings.add(new Motive(32, 16), "test_painting");
     }
+    
 }

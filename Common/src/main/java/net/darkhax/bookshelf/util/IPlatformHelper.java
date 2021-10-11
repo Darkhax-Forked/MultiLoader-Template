@@ -23,8 +23,8 @@ public interface IPlatformHelper {
     
     default boolean createDirectory(File file) {
         
-        if (!file.exists()) {
-    
+        if(!file.exists()) {
+            
             return file.mkdirs();
         }
         
@@ -36,4 +36,5 @@ public interface IPlatformHelper {
     boolean isDevelopmentEnvironment();
     
     PhysicalSide getPhysicalSide();
+    
 }

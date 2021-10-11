@@ -17,11 +17,12 @@ public class JSONHelper {
     
     public static String getAsString(JsonElement element) {
         
-        if (element instanceof JsonPrimitive primitive && primitive.isString()) {
+        if(element instanceof JsonPrimitive primitive && primitive.isString()) {
             
             return primitive.getAsString();
         }
         
         throw new JsonParseException("Expected String value but got " + element.toString());
     }
+    
 }

@@ -111,7 +111,7 @@ public class SerializerBlockPos implements ISerializer<BlockPos> {
                         .fromNBT(list.get(2)));
             }
             
-            throw new IllegalArgumentException("Invalid number of args in array. Expected 3 but got " + list.size());
+            throw new NBTParseException("Invalid number of args in array. Expected 3 but got " + list.size());
         }
         
         // If it's a number, try to read it as a long.
@@ -120,7 +120,7 @@ public class SerializerBlockPos implements ISerializer<BlockPos> {
             return BlockPos.of(numberTag.getAsLong());
         }
         
-        throw new IllegalArgumentException("BlockPos data is not in a readable format.");
+        throw new NBTParseException("BlockPos data is not in a readable format.");
     }
     
 }

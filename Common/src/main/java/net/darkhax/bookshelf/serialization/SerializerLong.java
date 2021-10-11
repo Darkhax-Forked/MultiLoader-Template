@@ -54,7 +54,7 @@ public final class SerializerLong implements ISerializer<Long> {
             return longTag.getAsLong();
         }
         
-        throw new IllegalArgumentException("Expected NBT to be a number tag. Class was " + nbt.getClass() + " with ID " + nbt
+        throw new NBTParseException("Expected NBT to be a number tag. Class was " + nbt.getClass() + " with ID " + nbt
                 .getId() + " instead.");
     }
     

@@ -29,4 +29,5 @@ public abstract class RegistryEntryConfig<T> extends ConfigBuilder<T> {
         
         return Path.of(this.ownerId + "/" + this.registryType + "/" + this.entryId + ".json");
     }
+    
 }
