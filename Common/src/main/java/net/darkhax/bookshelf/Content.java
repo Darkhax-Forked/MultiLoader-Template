@@ -1,5 +1,6 @@
 package net.darkhax.bookshelf;
 
+import net.darkhax.bookshelf.config.ItemBuilder;
 import net.darkhax.bookshelf.registry.ContentManager;
 import net.minecraft.world.entity.decoration.Motive;
 import net.minecraft.world.item.Item;
@@ -18,8 +19,7 @@ public class Content extends ContentManager {
         super(ownerId);
         
         this.testBlock = this.blocks.add(new Block(BlockBehaviour.Properties.of(Material.CLAY)), "test_block");
-        this.testItem = this.items.add(new Item(new Item.Properties()), "test_item");
+        this.testItem = this.items.add(new ItemBuilder<>(new Item.Properties(), "test_item"));
         this.testPainting = this.paintings.add(new Motive(32, 16), "test_painting");
     }
-    
 }

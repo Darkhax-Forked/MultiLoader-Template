@@ -1,9 +1,12 @@
 package net.darkhax.bookshelf.registry;
 
+import net.darkhax.bookshelf.config.ItemBuilder;
+import net.darkhax.bookshelf.config.RegistryEntryConfig;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Supplier;
 
 /**
  * A content holder will hold registrable content from a specific mod. Entries are held here to allow quick lookup and
@@ -27,6 +30,12 @@ public interface IContentHolder<T> {
     default <VT extends T> VT add(VT value, String id) {
         
         return this.add(value, new ResourceLocation(this.getOwnerId(), id));
+    }
+    
+    default <VT extends T> VT add(RegistryEntryConfig<VT> builder) {
+        
+        builder.updateOwner(this.getOwnerId());
+        return add(builder.get(), builder.getEntryId());
     }
     
     /**
