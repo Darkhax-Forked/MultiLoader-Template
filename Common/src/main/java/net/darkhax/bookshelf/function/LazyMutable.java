@@ -1,4 +1,4 @@
-package net.darkhax.bookshelf.collection;
+package net.darkhax.bookshelf.function;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
