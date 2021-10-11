@@ -1,4 +1,4 @@
-package net.darkhax.bookshelf.utils;
+package net.darkhax.bookshelf.util;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.world.entity.ai.attributes.Attribute;
