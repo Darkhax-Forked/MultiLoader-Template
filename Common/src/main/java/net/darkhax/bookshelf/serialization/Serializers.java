@@ -23,6 +23,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.item.Rarity;
 
 import java.util.UUID;
 
@@ -47,6 +48,10 @@ public class Serializers {
     public static final ISerializer<BlockPos> BLOCK_POS = SerializerBlockPos.SERIALIZER;
     public static final ISerializer<Ingredient> INGREDIENT = SerializerIngredient.SERIALIZER;
     public static final ISerializer<BlockState> BLOCK_STATE = SerializerBlockState.SERIALIZER;
+
+    // ENUMS
+    public static final ISerializer<Rarity> ITEM_RARITY = new SerializerEnum<>(Rarity.class);
+    public static final ISerializer<Enchantment.Rarity> ENCHANTMENT_RARITY = new SerializerEnum<>(Enchantment.Rarity.class);
 
     // REGISTRY TYPES
     public static final ISerializer<Block> BLOCK = new SerializerRegistryEntry<>(Registry.BLOCK);
