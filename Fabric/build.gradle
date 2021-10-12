@@ -40,10 +40,12 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    it.options.encoding = "UTF-8"
 
+    it.options.encoding = 'UTF-8'
     it.options.release = 16
 }
+
+sourceSets.main.resources.srcDir '../Common/src/main/resources'
 
 tasks.withType(JavaCompile) {
     source(project(":Common").sourceSets.main.allSource)
