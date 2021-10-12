@@ -1,6 +1,5 @@
 package net.darkhax.bookshelf.registry;
 
-import net.darkhax.bookshelf.config.RegistryEntryConfig;
 import net.minecraft.resources.ResourceLocation;
 
 import java.util.Map;
@@ -27,12 +26,6 @@ public interface IContentHolder<T> {
     default <VT extends T> VT add(VT value, String id) {
 
         return this.add(value, new ResourceLocation(this.getOwnerId(), id));
-    }
-
-    default <VT extends T> VT add(RegistryEntryConfig<VT> builder) {
-
-        builder.updateOwner(this.getOwnerId());
-        return add(builder.get(), builder.getEntryId());
     }
 
     /**
