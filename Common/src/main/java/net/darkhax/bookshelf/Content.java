@@ -13,9 +13,9 @@ public class Content extends ContentManager {
     public final Item testItem;
     public final Motive testPainting;
 
-    public Content(String ownerId) {
+    public Content() {
 
-        super(ownerId);
+        super(Bookshelf.MOD_ID);
 
         this.testBlock = this.blocks.add(new Block(BlockBehaviour.Properties.of(Material.CLAY)), "test_block");
         this.testItem = this.items.add(new Item(new Item.Properties()), "test_item");

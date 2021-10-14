@@ -12,7 +12,11 @@ public class RegistryHelperFabric implements IRegistryHelper {
 
         content.blocks.registerEntries(vanillaRegistryHandler(Registry.BLOCK));
         content.items.registerEntries(vanillaRegistryHandler(Registry.ITEM));
+        content.enchantments.registerEntries(vanillaRegistryHandler(Registry.ENCHANTMENT));
         content.paintings.registerEntries(vanillaRegistryHandler(Registry.MOTIVE));
+        content.mobEffects.registerEntries(vanillaRegistryHandler(Registry.MOB_EFFECT));
+        content.attributes.registerEntries(vanillaRegistryHandler(Registry.ATTRIBUTE));
+        content.villagerProfessions.registerEntries(vanillaRegistryHandler(Registry.VILLAGER_PROFESSION));
     }
 
     private <T> BiConsumer<ResourceLocation, T> vanillaRegistryHandler(Registry<T> registry) {

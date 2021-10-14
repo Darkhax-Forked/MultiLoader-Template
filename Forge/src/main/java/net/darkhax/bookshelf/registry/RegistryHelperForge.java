@@ -1,7 +1,11 @@
 package net.darkhax.bookshelf.registry;
 
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.decoration.Motive;
+import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -16,7 +20,11 @@ public class RegistryHelperForge implements IRegistryHelper {
 
         createRegistryListener(Block.class, content.blocks);
         createRegistryListener(Item.class, content.items);
+        createRegistryListener(Enchantment.class, content.enchantments);
         createRegistryListener(Motive.class, content.paintings);
+        createRegistryListener(MobEffect.class, content.mobEffects);
+        createRegistryListener(Attribute.class, content.attributes);
+        createRegistryListener(VillagerProfession.class, content.villagerProfessions);
     }
 
     private <T extends IForgeRegistryEntry<T>> void createRegistryListener(Class<T> clazz, IContentHolder<T> holder) {

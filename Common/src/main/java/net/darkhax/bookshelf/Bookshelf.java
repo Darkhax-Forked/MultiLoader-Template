@@ -17,11 +17,9 @@ public class Bookshelf {
     public static final Logger LOG = LogManager.getLogger(MOD_NAME);
     public static final DecimalFormat DECIMAL_2 = new DecimalFormat("##.##");
 
-    public final Content content;
+    public final Content content = new Content();
 
     public Bookshelf() {
-
-        this.content = new Content(MOD_ID);
 
         Services.EVENTS.onItemTooltip((stack, tooltip, flag) -> tooltip.add(new TextComponent("Test")));
         Services.EVENTS.onItemAttributeModifiers((stack, slot, modifiers) -> {
