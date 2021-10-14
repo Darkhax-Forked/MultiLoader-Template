@@ -3,7 +3,6 @@ package net.darkhax.bookshelf.util;
 import net.darkhax.bookshelf.lib.PhysicalSide;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.loader.api.FabricLoader;
-import org.apache.commons.lang3.NotImplementedException;
 
 import java.nio.file.Path;
 
@@ -37,11 +36,5 @@ public class PlatformHelperFabric implements IPlatformHelper {
     public PhysicalSide getPhysicalSide() {
 
         return FabricLoader.getInstance().getEnvironmentType() == EnvType.CLIENT ? PhysicalSide.CLIENT : PhysicalSide.SERVER;
-    }
-
-    @Override
-    public PhysicalSide getEffectiveSide() {
-
-        throw new NotImplementedException("I don't know a good way to do this so it's not implemented yet.");
     }
 }

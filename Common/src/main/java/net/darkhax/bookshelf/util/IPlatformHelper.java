@@ -37,8 +37,6 @@ public interface IPlatformHelper {
 
     PhysicalSide getPhysicalSide();
 
-    PhysicalSide getEffectiveSide();
-
     default boolean isPhysicalClient() {
 
         return this.getPhysicalSide().isClient();
