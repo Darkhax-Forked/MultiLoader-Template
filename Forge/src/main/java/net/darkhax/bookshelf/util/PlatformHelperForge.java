@@ -5,6 +5,7 @@ import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.minecraftforge.fml.loading.FMLLoader;
 import net.minecraftforge.fml.loading.FMLPaths;
+import net.minecraftforge.fml.util.thread.EffectiveSide;
 
 import java.nio.file.Path;
 
@@ -38,5 +39,11 @@ public class PlatformHelperForge implements IPlatformHelper {
     public PhysicalSide getPhysicalSide() {
 
         return FMLEnvironment.dist.isClient() ? PhysicalSide.CLIENT : PhysicalSide.SERVER;
+    }
+
+    @Override
+    public PhysicalSide getEffectiveSide() {
+
+        return EffectiveSide.get().isClient() ? PhysicalSide.CLIENT : PhysicalSide.SERVER;
     }
 }

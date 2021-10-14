@@ -1,24 +1,22 @@
 package net.darkhax.bookshelf;
 
-import net.darkhax.bookshelf.registry.ContentManager;
+import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.world.entity.decoration.Motive;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
-public class Content extends ContentManager {
+public class Content {
 
     public final Block testBlock;
     public final Item testItem;
     public final Motive testPainting;
 
-    public Content() {
+    public Content(RegistryHelper registry) {
 
-        super(Bookshelf.MOD_ID);
-
-        this.testBlock = this.blocks.add(new Block(BlockBehaviour.Properties.of(Material.CLAY)), "test_block");
-        this.testItem = this.items.add(new Item(new Item.Properties()), "test_item");
-        this.testPainting = this.paintings.add(new Motive(32, 16), "test_painting");
+        this.testBlock = registry.blocks.add(new Block(BlockBehaviour.Properties.of(Material.CLAY)), "test_block");
+        this.testItem = registry.items.add(new Item(new Item.Properties()), "test_item");
+        this.testPainting = registry.paintings.add(new Motive(32, 16), "test_painting");
     }
 }

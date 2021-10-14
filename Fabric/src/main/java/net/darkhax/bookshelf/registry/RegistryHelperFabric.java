@@ -1,26 +1,28 @@
 package net.darkhax.bookshelf.registry;
 
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 
-import java.util.function.BiConsumer;
+public class RegistryHelperFabric extends RegistryHelper {
 
-public class RegistryHelperFabric implements IRegistryHelper {
+    public RegistryHelperFabric(String ownerId) {
 
-    @Override
-    public void registerContent(ContentManager content) {
-
-        content.blocks.registerEntries(vanillaRegistryHandler(Registry.BLOCK));
-        content.items.registerEntries(vanillaRegistryHandler(Registry.ITEM));
-        content.enchantments.registerEntries(vanillaRegistryHandler(Registry.ENCHANTMENT));
-        content.paintings.registerEntries(vanillaRegistryHandler(Registry.MOTIVE));
-        content.mobEffects.registerEntries(vanillaRegistryHandler(Registry.MOB_EFFECT));
-        content.attributes.registerEntries(vanillaRegistryHandler(Registry.ATTRIBUTE));
-        content.villagerProfessions.registerEntries(vanillaRegistryHandler(Registry.VILLAGER_PROFESSION));
+        super(ownerId);
     }
 
-    private <T> BiConsumer<ResourceLocation, T> vanillaRegistryHandler(Registry<T> registry) {
+    @Override
+    public void init() {
 
-        return (id, value) -> Registry.register(registry, id, value);
+        this.consumeVanillaRegistry(blocks, Registry.BLOCK);
+        this.consumeVanillaRegistry(items, Registry.ITEM);
+        this.consumeVanillaRegistry(enchantments, Registry.ENCHANTMENT);
+        this.consumeVanillaRegistry(paintings, Registry.MOTIVE);
+        this.consumeVanillaRegistry(mobEffects, Registry.MOB_EFFECT);
+        this.consumeVanillaRegistry(attributes, Registry.ATTRIBUTE);
+        this.consumeVanillaRegistry(villagerProfessions, Registry.VILLAGER_PROFESSION);
+    }
+
+    private <T> void consumeVanillaRegistry(IModSpecificRegistry<T> toRegister, Registry<T> registry) {
+
+        toRegister.getValues().forEach((id, value) -> Registry.register(registry, id, value));
     }
 }

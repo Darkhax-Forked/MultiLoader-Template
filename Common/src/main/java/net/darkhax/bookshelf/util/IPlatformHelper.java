@@ -36,4 +36,6 @@ public interface IPlatformHelper {
     boolean isDevelopmentEnvironment();
 
     PhysicalSide getPhysicalSide();
+
+    PhysicalSide getEffectiveSide();
 }

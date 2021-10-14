@@ -9,34 +9,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/**
- * A default implementation of IContentHolder. Values are held in a plain Java HashMap.
- *
- * @param <T> The type of value held by the holder.
- */
-public class ContentHolder<T> implements IContentHolder<T> {
+public class ModSpecificRegistry<T> implements IModSpecificRegistry<T> {
 
-    /**
-     * The ID of the mod that owns this holder.
-     */
     private final String ownerId;
-
-    /**
-     * A map of all held content.
-     */
     private final Map<ResourceLocation, T> values;
-
-    /**
-     * An unmodifiable view of the values map.
-     */
     private final Map<ResourceLocation, T> valuesUnmodifiable;
-
-    /**
-     * A list of all insert listeners. These are notified when a value is added to the holder.
-     */
     private final List<BiConsumer<ResourceLocation, T>> insertListeners;
 
-    public ContentHolder(String ownerId) {
+    public ModSpecificRegistry(String ownerId) {
 
         this.ownerId = ownerId;
         this.values = new LinkedHashMap<>();
@@ -74,5 +54,11 @@ public class ContentHolder<T> implements IContentHolder<T> {
     public void addInsertListener(BiConsumer<ResourceLocation, T> listener) {
 
         this.insertListeners.add(listener);
+    }
+
+    @Override
+    public boolean isEmpty() {
+
+        return this.values.isEmpty();
     }
 }

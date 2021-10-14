@@ -13,31 +13,43 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 import java.util.function.Consumer;
 
-public class RegistryHelperForge implements IRegistryHelper {
+public class RegistryHelperForge extends RegistryHelper {
 
-    @Override
-    public void registerContent(ContentManager content) {
+    public RegistryHelperForge(String ownerId) {
 
-        createRegistryListener(Block.class, content.blocks);
-        createRegistryListener(Item.class, content.items);
-        createRegistryListener(Enchantment.class, content.enchantments);
-        createRegistryListener(Motive.class, content.paintings);
-        createRegistryListener(MobEffect.class, content.mobEffects);
-        createRegistryListener(Attribute.class, content.attributes);
-        createRegistryListener(VillagerProfession.class, content.villagerProfessions);
+        super(ownerId);
     }
 
-    private <T extends IForgeRegistryEntry<T>> void createRegistryListener(Class<T> clazz, IContentHolder<T> holder) {
+    @Override
+    public void init() {
 
-        final Consumer<RegistryEvent.Register<T>> listener = event -> holder.registerEntries((id, value) -> {
+        consumeRegistry(Block.class, this.blocks);
+        consumeRegistry(Item.class, this.items);
+        consumeRegistry(Enchantment.class, this.enchantments);
+        consumeRegistry(Motive.class, this.paintings);
+        consumeRegistry(MobEffect.class, this.mobEffects);
+        consumeRegistry(Attribute.class, this.attributes);
+        consumeRegistry(VillagerProfession.class, this.villagerProfessions);
+    }
 
-            if (value.getRegistryName() == null) {
-                value.setRegistryName(id);
-            }
+    private <T extends IForgeRegistryEntry<T>> void consumeRegistry(Class<T> clazz, IModSpecificRegistry<T> registry) {
 
-            event.getRegistry().register(value);
-        });
+        if (!registry.isEmpty()) {
 
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(clazz, listener);
+            final Consumer<RegistryEvent.Register<T>> listener = event -> {
+
+                registry.getValues().forEach((id, value) -> {
+
+                    if (value.getRegistryName() == null) {
+
+                        value.setRegistryName(id);
+                    }
+
+                    event.getRegistry().register(value);
+                });
+            };
+
+            FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(clazz, listener);
+        }
     }
 }

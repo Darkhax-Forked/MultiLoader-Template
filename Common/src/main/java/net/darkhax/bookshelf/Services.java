@@ -1,6 +1,7 @@
 package net.darkhax.bookshelf;
 
 import net.darkhax.bookshelf.event.IEventHelper;
+import net.darkhax.bookshelf.registry.IRegistryFactory;
 import net.darkhax.bookshelf.util.IPlatformHelper;
 
 import java.util.ServiceLoader;
@@ -9,6 +10,7 @@ public class Services {
 
     public static final IPlatformHelper PLATFORM = load(IPlatformHelper.class);
     public static final IEventHelper EVENTS = load(IEventHelper.class);
+    public static final IRegistryFactory REGISTRY = load(IRegistryFactory.class);
 
     public static <T> T load(Class<T> clazz) {
 
