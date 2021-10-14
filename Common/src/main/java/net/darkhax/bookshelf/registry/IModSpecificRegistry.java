@@ -14,7 +14,7 @@ public interface IModSpecificRegistry<T> {
 
     <VT extends T> VT add(VT value, ResourceLocation id);
 
-    Map<ResourceLocation, T> getValues();
+    Map<ResourceLocation, T> getEntries();
 
     String getOwnerId();
 

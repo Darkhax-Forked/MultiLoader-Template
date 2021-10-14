@@ -39,7 +39,7 @@ public class ModSpecificRegistry<T> implements IModSpecificRegistry<T> {
     }
 
     @Override
-    public Map<ResourceLocation, T> getValues() {
+    public Map<ResourceLocation, T> getEntries() {
 
         return this.valuesUnmodifiable;
     }
