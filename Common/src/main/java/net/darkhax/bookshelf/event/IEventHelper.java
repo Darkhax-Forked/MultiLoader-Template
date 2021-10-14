@@ -29,6 +29,7 @@ public interface IEventHelper {
 
     /**
      * Notifies an event listener when the server is collecting it's reload listeners. This applies to both physical/dedicated and logical/integrated servers.
+     *
      * @param event The event listener.
      */
     void addServerReloadListeners(BiConsumer<ServerResources, Consumer<PreparableReloadListener>> event);

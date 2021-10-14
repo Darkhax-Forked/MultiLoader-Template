@@ -1,5 +1,6 @@
 package net.darkhax.bookshelf.registry;
 
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.decoration.Motive;
@@ -18,6 +19,9 @@ public abstract class RegistryHelper {
     public final IModSpecificRegistry<Attribute> attributes;
     public final IModSpecificRegistry<VillagerProfession> villagerProfessions;
 
+    public final IModSpecificRegistry<PreparableReloadListener> serverReloadListeners;
+    public final IModSpecificRegistry<PreparableReloadListener> clientReloadListeners;
+
     protected RegistryHelper(String ownerId) {
 
         this.blocks = new ModSpecificRegistry<>(ownerId);
@@ -27,6 +31,9 @@ public abstract class RegistryHelper {
         this.mobEffects = new ModSpecificRegistry<>(ownerId);
         this.attributes = new ModSpecificRegistry<>(ownerId);
         this.villagerProfessions = new ModSpecificRegistry<>(ownerId);
+
+        this.serverReloadListeners = new ModSpecificRegistry<>(ownerId);
+        this.clientReloadListeners = new ModSpecificRegistry<>(ownerId);
     }
 
     public abstract void init();

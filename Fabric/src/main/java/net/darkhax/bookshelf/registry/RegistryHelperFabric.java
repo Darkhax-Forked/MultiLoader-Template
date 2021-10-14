@@ -1,6 +1,10 @@
 package net.darkhax.bookshelf.registry;
 
+import net.darkhax.bookshelf.Services;
+import net.darkhax.bookshelf.WrappedReloadListener;
+import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.minecraft.core.Registry;
+import net.minecraft.server.packs.PackType;
 
 public class RegistryHelperFabric extends RegistryHelper {
 
@@ -19,10 +23,17 @@ public class RegistryHelperFabric extends RegistryHelper {
         this.consumeVanillaRegistry(mobEffects, Registry.MOB_EFFECT);
         this.consumeVanillaRegistry(attributes, Registry.ATTRIBUTE);
         this.consumeVanillaRegistry(villagerProfessions, Registry.VILLAGER_PROFESSION);
+
+        this.serverReloadListeners.getEntries().forEach((k, v) -> ResourceManagerHelper.get(PackType.SERVER_DATA).registerReloadListener(new WrappedReloadListener(k, v)));
+
+        if (Services.PLATFORM.isPhysicalClient()) {
+
+            this.clientReloadListeners.getEntries().forEach((k, v) -> ResourceManagerHelper.get(PackType.CLIENT_RESOURCES).registerReloadListener(new WrappedReloadListener(k, v)));
+        }
     }
 
     private <T> void consumeVanillaRegistry(IModSpecificRegistry<T> toRegister, Registry<T> registry) {
 
-        toRegister.getValues().forEach((id, value) -> Registry.register(registry, id, value));
+        toRegister.getEntries().forEach((id, value) -> Registry.register(registry, id, value));
     }
 }

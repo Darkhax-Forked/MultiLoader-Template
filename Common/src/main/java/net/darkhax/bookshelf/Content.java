@@ -18,5 +18,8 @@ public class Content {
         this.testBlock = registry.blocks.add(new Block(BlockBehaviour.Properties.of(Material.CLAY)), "test_block");
         this.testItem = registry.items.add(new Item(new Item.Properties()), "test_item");
         this.testPainting = registry.paintings.add(new Motive(32, 16), "test_painting");
+
+        registry.clientReloadListeners.add(new TestListener("test_one"), "test_one");
+        registry.serverReloadListeners.add(new TestListener("test_two"), "test_two");
     }
 }

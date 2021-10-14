@@ -7,7 +7,12 @@ import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.client.event.RegisterClientReloadListenersEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.AddReloadListenerEvent;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.Event;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 
@@ -30,6 +35,9 @@ public class RegistryHelperForge extends RegistryHelper {
         consumeRegistry(MobEffect.class, this.mobEffects);
         consumeRegistry(Attribute.class, this.attributes);
         consumeRegistry(VillagerProfession.class, this.villagerProfessions);
+
+        consumeWithModEvent(RegisterClientReloadListenersEvent.class, this.clientReloadListeners, e -> this.clientReloadListeners.getEntries().values().forEach(e::registerReloadListener));
+        consumeWithEvent(AddReloadListenerEvent.class, this.serverReloadListeners, e -> this.serverReloadListeners.getEntries().values().forEach(e::addListener));
     }
 
     private <T extends IForgeRegistryEntry<T>> void consumeRegistry(Class<T> clazz, IModSpecificRegistry<T> registry) {
@@ -38,7 +46,7 @@ public class RegistryHelperForge extends RegistryHelper {
 
             final Consumer<RegistryEvent.Register<T>> listener = event -> {
 
-                registry.getValues().forEach((id, value) -> {
+                registry.getEntries().forEach((id, value) -> {
 
                     if (value.getRegistryName() == null) {
 
@@ -50,6 +58,22 @@ public class RegistryHelperForge extends RegistryHelper {
             };
 
             FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(clazz, listener);
+        }
+    }
+
+    private <T, E extends Event> void consumeWithModEvent(Class<E> clazz, IModSpecificRegistry<T> registry, Consumer<E> listener) {
+
+        if (!registry.isEmpty()) {
+
+            FMLJavaModLoadingContext.get().getModEventBus().addListener(EventPriority.NORMAL, false, clazz, listener);
+        }
+    }
+
+    private <T, E extends Event> void consumeWithEvent(Class<E> clazz, IModSpecificRegistry<T> registry, Consumer<E> listener) {
+
+        if (!registry.isEmpty()) {
+
+            MinecraftForge.EVENT_BUS.addListener(EventPriority.NORMAL, false, clazz, listener);
         }
     }
 }
