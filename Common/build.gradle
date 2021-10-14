@@ -6,7 +6,7 @@ plugins {
 archivesBaseName = "${mod_name}-common-${minecraft_version}"
 
 dependencies {
-    implementation "org.spongepowered:mixin:0.8.4"
+    compileOnly group: 'org.spongepowered', name: 'mixin', version: '0.8.4'
 }
 
 minecraft {
