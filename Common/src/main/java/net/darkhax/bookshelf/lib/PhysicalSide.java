@@ -6,12 +6,12 @@ public enum PhysicalSide {
 
     SERVER;
 
-    boolean isClient() {
+    public boolean isClient() {
 
         return this == CLIENT;
     }
 
-    boolean isServer() {
+    public boolean isServer() {
 
         return this == SERVER;
     }
