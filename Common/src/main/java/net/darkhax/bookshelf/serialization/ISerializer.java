@@ -69,6 +69,11 @@ public interface ISerializer<T> {
         return json.has(memberName) ? this.fromJSON(json, memberName) : fallback.get();
     }
 
+    default void toJSON(JsonObject json, String name, T toWrite) {
+
+        json.add(name, this.toJSON(toWrite));
+    }
+
     /**
      * Writes a value to a JSON element.
      *
