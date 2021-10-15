@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -50,6 +51,7 @@ public class Serializers {
     public static final ISerializer<Ingredient> INGREDIENT = SerializerIngredient.SERIALIZER;
     public static final ISerializer<BlockState> BLOCK_STATE = SerializerBlockState.SERIALIZER;
     public static final ISerializer<AttributeModifier> ATTRIBUTE_MODIFIER = SerializerAttributeModifier.SERIALIZER;
+    public static final ISerializer<MobEffectInstance> EFFECT_INSTANCE = new SerializerEffectInstance();
 
     // ENUMS
     public static final ISerializer<Rarity> ITEM_RARITY = new SerializerEnum<>(Rarity.class);

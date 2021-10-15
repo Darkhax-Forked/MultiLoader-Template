@@ -3,6 +3,7 @@ package net.darkhax.bookshelf.serialization;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
 import net.darkhax.bookshelf.util.JSONHelper;
+import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.StringTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
@@ -56,12 +57,29 @@ public class SerializerEnum<T extends Enum<T>> implements ISerializer<T> {
     @Override
     public T fromNBT(Tag nbt) {
 
+        if (nbt instanceof IntTag integer) {
+
+            return this.getByIndex(integer.getAsInt());
+        }
+
         if (nbt instanceof StringTag stringTag) {
 
             return this.getByName(stringTag.getAsString());
         }
 
         throw new NBTParseException("Expected NBT to be a String tag. Class was " + nbt.getClass() + " with ID " + nbt.getId() + " instead.");
+    }
+
+    private T getByIndex(int index) {
+
+        final T[] values = enumClass.getEnumConstants();
+
+        if (index < 0 || index > values.length) {
+
+            throw new IndexOutOfBoundsException("Cannot read enum by index. Class: " + enumClass.getCanonicalName() + " Index: " + index + " Size: " + values.length);
+        }
+
+        return values[index];
     }
 
     private T getByName(String name) {
