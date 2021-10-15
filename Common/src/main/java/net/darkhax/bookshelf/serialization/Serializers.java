@@ -10,6 +10,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.decoration.Motive;
 import net.minecraft.world.entity.npc.VillagerProfession;
 import net.minecraft.world.entity.npc.VillagerType;
@@ -48,10 +49,12 @@ public class Serializers {
     public static final ISerializer<BlockPos> BLOCK_POS = SerializerBlockPos.SERIALIZER;
     public static final ISerializer<Ingredient> INGREDIENT = SerializerIngredient.SERIALIZER;
     public static final ISerializer<BlockState> BLOCK_STATE = SerializerBlockState.SERIALIZER;
+    public static final ISerializer<AttributeModifier> ATTRIBUTE_MODIFIER = SerializerAttributeModifier.SERIALIZER;
 
     // ENUMS
     public static final ISerializer<Rarity> ITEM_RARITY = new SerializerEnum<>(Rarity.class);
     public static final ISerializer<Enchantment.Rarity> ENCHANTMENT_RARITY = new SerializerEnum<>(Enchantment.Rarity.class);
+    public static final ISerializer<AttributeModifier.Operation> ATTRIBUTE_OPERATION = new SerializerEnum<>(AttributeModifier.Operation.class);
 
     // REGISTRY TYPES
     public static final ISerializer<Block> BLOCK = new SerializerRegistryEntry<>(Registry.BLOCK);
