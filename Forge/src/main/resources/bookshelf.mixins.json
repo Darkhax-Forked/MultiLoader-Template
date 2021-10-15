@@ -4,7 +4,8 @@
   "package": "net.darkhax.bookshelf.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "item.AccessorItemProperties"
+    "item.AccessorItemProperties",
+    "effect.AccessorMobEffectInstance"
   ],
   "client": [
   ],

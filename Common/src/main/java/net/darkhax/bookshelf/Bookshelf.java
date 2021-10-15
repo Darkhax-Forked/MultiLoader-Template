@@ -2,9 +2,12 @@ package net.darkhax.bookshelf;
 
 import net.darkhax.bookshelf.registry.RegistryHelper;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.Items;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +26,8 @@ public class Bookshelf {
 
     public Bookshelf() {
 
+        LivingEntity e;
+        e.addEffect()
         registry.init();
         Services.EVENTS.onItemTooltip((stack, tooltip, flag) -> tooltip.add(new TextComponent("Test")));
         Services.EVENTS.onItemAttributeModifiers((stack, slot, modifiers) -> {
