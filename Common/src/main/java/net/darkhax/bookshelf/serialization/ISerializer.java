@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.darkhax.bookshelf.util.JSONHelper;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -113,6 +114,26 @@ public interface ISerializer<T> {
      * @return The value that was read from the data.
      */
     T fromNBT(Tag nbt);
+
+    default T fromNBT(CompoundTag tag, String name) {
+
+        if (tag.contains(name)) {
+
+            return this.fromNBT(tag.get(name));
+        }
+
+        throw new NBTParseException("Required tag " + name + " was not present.");
+    }
+
+    default T fromNBT(CompoundTag tag, String name, T fallback) {
+
+        return tag.contains(name) ? this.fromNBT(tag.get(name)) : fallback;
+    }
+
+    default void toNBT(CompoundTag tag, String name, T toWrite) {
+
+        tag.put(name, this.toNBT(toWrite));
+    }
 
     /**
      * Reads a list of values from JSON. When given a JSON array each entry is added to the list. When given a JSON
