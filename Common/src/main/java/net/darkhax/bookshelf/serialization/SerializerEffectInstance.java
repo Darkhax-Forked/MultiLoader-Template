@@ -4,6 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import net.darkhax.bookshelf.mixin.effect.AccessorMobEffectInstance;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.effect.MobEffect;
@@ -11,7 +12,11 @@ import net.minecraft.world.effect.MobEffectInstance;
 
 import java.util.Optional;
 
-public class SerializerEffectInstance implements ISerializer<MobEffectInstance>{
+/**
+ * This is a serializer that does several things and stuff. This is just a test to seee how the line wrapping will work.
+ * I don't really know what to write here but okay this is probably enought lol.
+ */
+public class SerializerEffectInstance implements ISerializer<MobEffectInstance> {
 
     @Override
     public MobEffectInstance fromJSON(JsonElement json) {
@@ -44,7 +49,7 @@ public class SerializerEffectInstance implements ISerializer<MobEffectInstance>{
         }
 
         if (toWrite.isAmbient()) {
-            Serializers.BOOLEAN.toJSON(json,"ambient", toWrite.isAmbient());
+            Serializers.BOOLEAN.toJSON(json, "ambient", toWrite.isAmbient());
         }
 
         if (!toWrite.isVisible()) {
@@ -71,22 +76,64 @@ public class SerializerEffectInstance implements ISerializer<MobEffectInstance>{
         final boolean ambient = Serializers.BOOLEAN.fromByteBuf(buffer);
         final boolean visible = Serializers.BOOLEAN.fromByteBuf(buffer);
         final boolean showIcon = Serializers.BOOLEAN.fromByteBuf(buffer);
-        final MobEffectInstance hiddenEffect = Serializers.EFFECT_INSTANCE.fromByteBuf(buffer);
+        final MobEffectInstance hiddenEffect = Serializers.EFFECT_INSTANCE.fromByteBufOptional(buffer).orElse(null);
         return new MobEffectInstance(effect, duration, amplifier, ambient, visible, showIcon, hiddenEffect);
     }
 
     @Override
     public void toByteBuf(FriendlyByteBuf buffer, MobEffectInstance toWrite) {
 
+        Serializers.MOB_EFFECT.toByteBuf(buffer, toWrite.getEffect());
+        Serializers.INT.toByteBuf(buffer, toWrite.getDuration());
+        Serializers.INT.toByteBuf(buffer, toWrite.getAmplifier());
+        Serializers.BOOLEAN.toByteBuf(buffer, toWrite.isAmbient());
+        Serializers.BOOLEAN.toByteBuf(buffer, toWrite.isVisible());
+        Serializers.BOOLEAN.toByteBuf(buffer, toWrite.showIcon());
+        Serializers.EFFECT_INSTANCE.toByteBufOptional(buffer, Optional.of(((AccessorMobEffectInstance) toWrite).bookshelf$getHiddenEffect()));
     }
 
     @Override
     public Tag toNBT(MobEffectInstance toWrite) {
-        return null;
+
+        final CompoundTag tag = new CompoundTag();
+        Serializers.MOB_EFFECT.toNBT(tag, "effect", toWrite.getEffect());
+        Serializers.INT.toNBT(tag, "duration", toWrite.getDuration());
+
+        if (toWrite.getAmplifier() != 0) {
+            Serializers.INT.toNBT(tag, "amplifier", toWrite.getAmplifier());
+        }
+
+        if (toWrite.isAmbient()) {
+            Serializers.BOOLEAN.toNBT(tag, "ambient", toWrite.isAmbient());
+        }
+
+        if (!toWrite.isVisible()) {
+            Serializers.BOOLEAN.toNBT(tag, "visible", toWrite.isVisible());
+        }
+
+        if (!toWrite.showIcon()) {
+            Serializers.BOOLEAN.toNBT(tag, "showIcon", toWrite.showIcon());
+        }
+
+        if (((AccessorMobEffectInstance) toWrite).bookshelf$getHiddenEffect() != null) {
+            Serializers.EFFECT_INSTANCE.toNBT(tag, "hiddenEffect", ((AccessorMobEffectInstance) toWrite).bookshelf$getHiddenEffect());
+        }
+        return tag;
     }
 
     @Override
     public MobEffectInstance fromNBT(Tag nbt) {
-        return null;
+
+        final CompoundTag tag = Serializers.COMPOUND_TAG.fromNBT(nbt);
+
+        final MobEffect effect = Serializers.MOB_EFFECT.fromNBT(tag, "effect");
+        final int duration = Serializers.INT.fromNBT(tag, "duration");
+        final int amplifier = Serializers.INT.fromNBT(tag, "amplifier", 0);
+        final boolean ambient = Serializers.BOOLEAN.fromNBT(tag, "ambient", false);
+        final boolean visible = Serializers.BOOLEAN.fromNBT(tag, "visible", true);
+        final boolean showIcon = Serializers.BOOLEAN.fromNBT(tag, "showIcon", true);
+        final MobEffectInstance hiddenEffect = Serializers.EFFECT_INSTANCE.fromNBT(tag, "hiddenEffect", (MobEffectInstance) null);
+
+        return new MobEffectInstance(effect, duration, amplifier, ambient, visible, showIcon, hiddenEffect);
     }
 }
