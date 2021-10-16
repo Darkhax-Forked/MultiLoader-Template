@@ -10,9 +10,8 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
 /**
- * Fabric requests modded reload listeners to implement their IdentifiableResourceReloadListener
- * interface. This implementation simply wraps a standard vanilla compliant implementation to make
- * it Fabric compliant.
+ * Fabric requests modded reload listeners to implement their IdentifiableResourceReloadListener interface. This
+ * implementation simply wraps a standard vanilla compliant implementation to make it Fabric compliant.
  */
 public class WrappedReloadListener implements IdentifiableResourceReloadListener {
 
